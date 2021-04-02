@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+    {% block heading %}
+        <h1>this is register page</h1>
+    {% endblock %}
+
+    {% block functionality %}
+    <div class="container"> 
+        <div class="jumbotron">
+            <form action="{% url 'app:register' %}" method="POST" >
+                    {% csrf_token %}
+                    {{form.as_p}}
+                <input type="submit" name="" id="" value='register'>
+            </form>
+        </div>
+    </div>
+
+
+    {% endblock %}
+    

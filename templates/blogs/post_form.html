@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+    {% block heading %}
+
+        {% if form.instance.pk %}
+            <h1>this is post update page</h1>
+        {% else %} 
+            <h1>this is post Create page</h1>
+        {% endif%}
+
+    {% endblock %}
+
+    {% block functionality %}
+    <div class="container"> 
+        <div class="jumbotron">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+                {% if form.instance.pk %}
+                <input type="submit" value="Update post">
+                {% else %}
+                <input type="submit" name="" id="" value="Create Post">
+                {% endif%}
+            </form>        
+        </div>
+    </div>
+
+    {% endblock %}
+
+
+    <!-- This is 1 post of ravi007. -->
+<!-- post 1 of ravi007.  -->

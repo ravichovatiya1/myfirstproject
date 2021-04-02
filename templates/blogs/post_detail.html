@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+    {% block heading %}
+    <h1>this is post Create page</h1>
+    {% endblock %}
+
+    {% block functionality %}
+    <div class="container"> 
+        <div class="jumbotron">
+            <h2>{{object.Title}}</h2>
+            <ul>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{object.Text}}</li>
+            </ul>
+            {% if not object.Published_date %}
+                <!-- <a href="{% url 'app:publish' object.id %}">Published</a> -->
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="{% url 'app:publish' object.id %}">Published</a>&nbsp;&nbsp;/&nbsp;&nbsp;
+                <a href="{% url 'app:post_delete' object.pk %}">Delete</a>&nbsp;&nbsp;/&nbsp;&nbsp;
+                <a href="{% url 'app:post_update' object.pk %}">Edit</a>
+            
+            {% endif %}
+
+
+            <br><hr>
+            <h3 style="text-align: center;text-decoration: underline; margin-bottom: 20px;">Comment Section</h3>
+            <h3 style="text-align: left;text-decoration: underline; margin-bottom: 40px;"><a  href="{% url 'app:add_comment' object.pk %}">Add Comment</a></h3>
+
+            {% for comment in object.comments.all %}
+                    <h4>Author: {{comment.Author}}</h4>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp; Text : {{comment.Text}}</p>
+                {% empty %}
+                <h4>no comment to display</h4>
+                {% endfor %}
+            
+        </div>
+    </div>
+
+    {% endblock %}

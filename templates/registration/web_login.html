@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+        {% block heading %}
+            <h1>this is login page</h1>
+        {% endblock %}
+    <br>
+
+    {% block functionality %}
+    <div class="container"> 
+        <div class="jumbotron">
+            <form action="{% url 'app:login' %}" method="post">
+                {% csrf_token %}
+                <label for="name">Username : </label>
+                <input style="margin:20px;" type="text" name="username" id="name" ><br>
+
+                <label for="pass">Password : </label>
+                <input style="margin:20px;" type="password" name="password" id="pass" ><br>
+
+                <input style="margin:20px 175px;" type="submit" value="Log In">
+            </form>
+        </div>
+    </div>
+
+    {% endblock %}

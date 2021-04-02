@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+    {% block heading %}
+        <h1>this is Add Comment Page</h1>
+    {% endblock %}
+
+    {% block functionality %}
+    <form action="{% url 'app:add_comment' pk %}" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Post Comment">
+    </form>
+
+    {% endblock %}

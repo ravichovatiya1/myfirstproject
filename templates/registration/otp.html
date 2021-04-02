@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+    {% block heading %}
+            <h1>Welcome to otp varification page</h1>
+
+    {% endblock %}
+    <br>
+
+    {% block functionality %}
+
+    <div class="container"> 
+        <div class="jumbotron">
+            <form action="{% url 'app:otp' %}" method="POST">
+                {% csrf_token %}
+                <label for="otp">Enter OTP</label>
+                <input type="number" id="otp" name="conf_otp" maxlength="4" minlength="4" placeholder="Enter Your OTP">
+                <input type="hidden" name= "otp" value="{{otp}}" >
+                <input type="submit" name="" id="" value="Submit"> 
+            </form>
+        </div>
+    </div>
+    {% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+    {% block heading %}
+    <h1>this is post list page</h1>
+    {% endblock %}
+
+    {% block functionality %}
+   
+    <div class="container"> 
+        <div class="jumbotron">
+            <table border="1"> 
+                <tr>
+                    <th style="padding: 5px 15px; text-align: center;">Author </th>
+                    <th style="padding: 5px 15px; text-align: center;">Title</th>
+                    <th style="padding: 5px 15px; text-align: center;">Text / Content</th>
+                    {% if object_list.Published_date %}
+                    <th style="padding: 5px 15px; text-align: center;">Pubsished</th>  
+                    <th style="padding: 5px 15px; text-align: center;"> Edit / Delete</th>
+
+                    {% elif not objct_list.published_date %}
+                    <th style="padding: 5px 15px; text-align: center;"> Draft</th>
+                    {% endif %} 
+
+                </tr>
+                
+                {% for object in object_list %}
+                <tr>
+                    <td style="padding: 5px 15px;"><b>{{object.author}}</b></td>
+                    <td style="padding: 5px 15px;"><a href="{% url 'app:post_detail' object.id %}">{{object.Title}}</a></td>
+                    <td style="padding: 5px 15px; overflow:hidden;">{{object.Text}}</td>
+                    {% if not object.Published_date %}
+                        <td style="padding: 5px 15px;"><a href="{% url 'app:publish' object.id %}">Published</a></td>
+                        <td style="padding: 5px 15px;"><a href="{% url 'app:post_update' object.pk %}">Edit</a>&nbsp;&nbsp;/&nbsp;&nbsp;
+                            <a href="{% url 'app:post_delete' object.pk %}">Delete</a></td>
+                    
+                    
+                    {% elif request.session.username == object.author.username %}
+                    <td style="padding: 5px 15px;"><a href="{% url 'app:drafts' object.id %}">Draft</a></td>
+
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </table>
+            {% if is_paginated %}
+            <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li>
+                    <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+                </li>
+            {% endif %}
+                <li class="">
+                    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+                </li>
+            {% if page_obj.has_next %}
+                <li>
+                    <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+                </li>
+            {% endif %}
+            </ul>
+            {% else %}
+                <h3>Your File Exam</h3>
+                <p>File not yet available</p>
+            {% endif %}
+        </div>
+    </div>
+
+    {% endblock %}
